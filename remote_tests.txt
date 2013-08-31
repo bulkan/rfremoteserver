@@ -1,0 +1,12 @@
+*** Settings ***
+Library    Remote    http://localhost:${PORT}
+
+*** Variables ***
+${PORT}    8270
+
+*** Test Cases ***
+
+Test Keyword
+    ${ret}=   My Example Keyword
+    Log    ${ret}
+
