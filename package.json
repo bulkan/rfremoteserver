@@ -7,5 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Bulkan Evcimen",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "xmlrpc": "~1.1.0"
+  }
 }
