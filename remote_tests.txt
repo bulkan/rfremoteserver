@@ -10,3 +10,6 @@ Test Keyword
     ${ret}=   My Example Keyword
     Log   ${ret}
 
+Test Get Current Working Directory
+   ${files}=   Get Files In Directory
+   Log  ${files}
