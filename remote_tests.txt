@@ -8,5 +8,5 @@ ${PORT}    8270
 
 Test Keyword
     ${ret}=   My Example Keyword
-    Log    ${ret}
+    Log   ${ret}
 

@@ -4,13 +4,12 @@ var util         = require('util')
 var TestLibrary = function() {
   var self = this;
 
-  self.documentation = {
-  
-  };
-
   self.my_example_keyword = function(params, callback) {
-    console.log('my_example_keyword');
-    return this.pass(callback);
+    var ret = {
+      output: ['array', 'of', 'outputs'].join('\n'),
+      return: 'return value of keyword'
+    }
+    return this.pass(ret, callback);
   }
 };
 
