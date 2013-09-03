@@ -13,7 +13,7 @@ Usage
 
 Create a `class` and that inherits from `RemoteServer`, e.g;
 
-```javascript
+```nodejs
 var TestLibrary = function() {
   var self = this;
 
