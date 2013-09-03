@@ -9,6 +9,8 @@
   "author": "Bulkan Evcimen",
   "license": "MIT",
   "dependencies": {
-    "xmlrpc": "~1.1.0"
+    "xmlrpc": "~1.1.0",
+    "should": "~1.2.2",
+    "mocha": "~1.12.1"
   }
 }
