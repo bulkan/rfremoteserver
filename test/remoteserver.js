@@ -1,15 +1,23 @@
-var xmlrpc = require('xmlrpc') 
+var xmlrpc       = require('xmlrpc')
   , RemoteServer = require('../lib/remoteserver');
 
-var options = {host: 'localhost', port: 8270};
+var options = {host: 'localhost', port: 4242};
 
 describe('RemoteServer', function(){
-  var server; 
+  var server = null;
 
   before(function(done){
-    server = new RemoteServer(options).start_remote_server();
+    server = new RemoteServer(options);
+    server.start_remote_server();
     // need to give the server a litte time to start
     setTimeout(done, 100);
+  });
+
+  it('starts on specified port number', function(done){
+    server.should.have.property('conf');
+    server.conf.should.have.property('port');
+    server.conf.port.should.be.equal(options.port);
+    done();
   });
 
   it('get_keyword_arguments should return correct value', function(done){
