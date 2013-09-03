@@ -1,7 +1,7 @@
 robotremoteserver.js
 ====================
 
-Robot Framewore Remote Server written in Node.js, loosely based on https://github.com/mkorpela/RoboZombie/blob/master/robozombie.coffee
+[Robot Framework](http://robotframework.googlecode.com/hg/) Remote Server written in Node.js, loosely based on https://github.com/mkorpela/RoboZombie/blob/master/robozombie.coffee
 
 Installation
 ============
