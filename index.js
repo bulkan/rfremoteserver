@@ -1,1 +1,1 @@
-module.exports =  require('.lib/remoteserver');
+module.exports =  require('./lib/remoteserver');
