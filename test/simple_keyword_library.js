@@ -1,42 +1,40 @@
 var xmlrpc       = require('xmlrpc')
-  , util         = require('util')
   , fs           = require('fs')
   , RemoteServer = require('../lib/remoteserver');
 
-var options = {host: 'localhost', port: 8270};
+var options = {host: 'localhost', port: 4242};
 
 
-var SimpleKeywordLibrary = function(conf) {
-  var self = this;
-  self.conf = conf;
-
-  self.file_should_exist = function(params, callback) {
+var SimpleKeywordLibrary = {
+  file_should_exist: function(params, callback) {
     var dir = params.shift();
     var file = params.shift();
     var ret = {};
     fs.readdir(dir, function(err, files){
       ret.return = err || files;
-      if (err) return self.fail(ret, callback);
+      if (err) return RemoteServer.fail(ret, callback);
 
       for (i in files){
         if (files[i] == file)
-          return self.pass(ret, callback);
+          return RemoteServer.pass(ret, callback);
       }
-      return self.fail(ret, callback);
+      return RemoteServer.fail(ret, callback);
     });
-  };
+  }
 };
-
-util.inherits(SimpleKeywordLibrary, RemoteServer);
 
 
 describe('SimpleKeywordLibrary', function(){
   var server = null;
 
   before(function(done){
-    server = new SimpleKeywordLibrary(options);
+    server = new RemoteServer(options, [SimpleKeywordLibrary]);
     server.start_remote_server();
     done();
+  });
+
+  after(function(done){
+    server.close(done);
   });
 
   it('starts on specified port number', function(done){

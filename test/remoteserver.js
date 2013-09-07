@@ -13,6 +13,10 @@ describe('RemoteServer', function(){
     setTimeout(done, 100);
   });
 
+  after(function(done){
+    server.close(done);
+  });
+
   it('starts on specified port number', function(done){
     server.should.have.property('conf');
     server.conf.should.have.property('port');
