@@ -3,42 +3,48 @@
 robotremoteserver.js
 ====================
 
-[Robot Framework](http://robotframework.googlecode.com/hg/) Remote Server written in Node.js, loosely based on https://github.com/mkorpela/RoboZombie/blob/master/robozombie.coffee
+[Robot Framework](http://robotframework.googlecode.com/hg/) Remote Server written in Node.js, loosely based on https://github.com/mkorpela/RoboZombie and https://github.com/comick/node-robotremoteserver
 
 Installation
 ============
 
-Will upload to `npm` soonish
+`npm install rfremoteserver`
+
 
 Usage
 =====
 
-Create a `class` and that inherits from `RemoteServer`, e.g;
+Create a Object like the following and pass it to an instance of RemoteServer. 
 
-```nodejs
-var TestLibrary = function() {
-  var self = this;
+```javascript
+var RemoteServer = require('rfremoteserver');
 
-  self.my_example_keyword = function(params, callback) {
-    // do testy stuff here then either pass the keyword using this.pass or this.fail
-    return this.pass(callback);
+var TestLibrary = {
+  my_example_keyword = {
+    docs: "an example keyword",
+    args: [],
+    function(params, callback) {
+      var ret = {};
+      // do testy stuff here then either pass the keyword using this.pass or this.fail
+      return RemoteServer.pass(callback);
+    }
   }
 };
 
-util.inherits(TestLibrary, RemoteServer);
 
-var server = new TestLibrary();
+var server = new RemoteServer({host: "localhost", port: 4242}, [TestLibrary]);
 server.start_remote_server();
 ```
 
 Example test case file for Robot Framework to use the above remote keyword library
 
-```text
-*** Settings ***
-Library    Remote    http://localhost:${PORT}
-
+```
 *** Variables ***
 ${PORT}    8270
+
+
+*** Settings ***
+Library    Remote    http://localhost:${PORT}
 
 *** Test Cases ***
 
