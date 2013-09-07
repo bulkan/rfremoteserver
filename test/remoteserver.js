@@ -26,7 +26,7 @@ describe('RemoteServer', function(){
 
   it('get_keyword_arguments should return correct value', function(done){
     var client = new xmlrpc.createClient(options, false);
-    client.methodCall('get_keyword_arguments', null, function(err, value){
+    client.methodCall('get_keyword_arguments', ['get keyword arguments'], function(err, value){
       if (err) return done(err);
       // correct value is that all keywords accept varying arguments
       value[0].should.equal('*args');

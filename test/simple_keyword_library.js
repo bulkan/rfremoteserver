@@ -6,20 +6,24 @@ var options = {host: 'localhost', port: 4242};
 
 
 var SimpleKeywordLibrary = {
-  file_should_exist: function(params, callback) {
-    var dir = params.shift();
-    var file = params.shift();
-    var ret = {};
-    fs.readdir(dir, function(err, files){
-      ret.return = err || files;
-      if (err) return RemoteServer.fail(ret, callback);
+  file_should_exist: {
+    docs: "test if a file exists",
+    args: ['dir', 'file'],
+    impl: function(params, callback) {
+      var dir = params.shift();
+      var file = params.shift();
+      var ret = {};
+      fs.readdir(dir, function(err, files){
+        ret.return = err || files;
+        if (err) return RemoteServer.fail(ret, callback);
 
-      for (i in files){
-        if (files[i] == file)
-          return RemoteServer.pass(ret, callback);
-      }
-      return RemoteServer.fail(ret, callback);
-    });
+        for (i in files){
+          if (files[i] == file)
+            return RemoteServer.pass(ret, callback);
+        }
+        return RemoteServer.fail(ret, callback);
+      });
+    }
   }
 };
 
@@ -64,6 +68,27 @@ describe('SimpleKeywordLibrary', function(){
       value.should.have.property('status');
       value.return.should.include('lib');
       value.status.should.be.equal('PASS');
+      return done();
+    });
+  });
+
+  it('get_keyword_arguments should return correct value', function(done){
+    var client = new xmlrpc.createClient(options, false);
+    client.methodCall('get_keyword_arguments', ['file should exist'], function(err, value){
+      if (err) return done(err);
+      value.should.not.be.empty;
+      value.should.include('dir');
+      value.should.include('file');
+      return done();
+    });
+  });
+
+  it('get_keyword_documentation should return correct value', function(done){
+    var client = new xmlrpc.createClient(options, false);
+    client.methodCall('get_keyword_documentation', ['file should exist'], function(err, value){
+      if (err) return done(err);
+      value.should.not.be.empty;
+      value.should.equal(SimpleKeywordLibrary.file_should_exist.docs);
       return done();
     });
   });
