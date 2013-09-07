@@ -5,7 +5,7 @@ var TestLibrary = {
   my_example_keyword: {
     impl: function(params, callback) {
       var ret = {
-output: ['array', 'of', 'outputs'].join('\n'),
+        output: ['array', 'of', 'outputs'].join('\n'),
         return: 'return value of keyword'
       }
       return RemoteServer.pass(ret, callback);
