@@ -5,12 +5,16 @@ var options = {host: 'localhost', port: 4242};
 
 describe('RemoteServer', function(){
   var server = null;
+  var client = null;
 
   before(function(done){
     server = new RemoteServer(options);
     server.start_remote_server();
     // need to give the server a litte time to start
-    setTimeout(done, 100);
+    setTimeout(function() { 
+      client = new xmlrpc.createClient(options, false);
+      done();
+    }, 100);
   });
 
   after(function(done){
