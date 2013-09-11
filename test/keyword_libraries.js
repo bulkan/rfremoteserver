@@ -1,4 +1,5 @@
-var fs = require('fs');
+var fs           = require('fs')
+  , RemoteServer = require('../lib/remoteserver');
 
 var exports = module.exports;
 
