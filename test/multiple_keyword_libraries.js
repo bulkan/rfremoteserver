@@ -1,12 +1,11 @@
-var xmlrpc               = require('xmlrpc')
-  , RemoteServer         = require('../lib/remoteserver')
-  , libraries            = require('./keyword_libraries')
-  , SimpleKeywordLibrary = libraries.SimpleKeywordLibrary;
+var xmlrpc       = require('xmlrpc')
+  , fs           = require('fs')
+  , RemoteServer = require('../lib/remoteserver');
 
 var options = {host: 'localhost', port: 4242};
 
 
-describe('Simple keyword libraries', function(){
+describe('SimpleKeywordLibrary', function(){
   var server = null;
 
   before(function(done){
@@ -66,7 +65,7 @@ describe('Simple keyword libraries', function(){
     client.methodCall('get_keyword_documentation', ['file should exist'], function(err, value){
       if (err) return done(err);
       value.should.not.be.empty;
-      value.should.equal(libraries.SimpleKeywordLibrary.file_should_exist.docs);
+      value.should.equal(SimpleKeywordLibrary.file_should_exist.docs);
       return done();
     });
   });
