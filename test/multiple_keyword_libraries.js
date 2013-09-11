@@ -39,5 +39,15 @@ describe('Multiple Keyword Libraries', function(){
     });
   });
 
-});
 
+  it('should be able to run keyword', function(done){
+    var client = new xmlrpc.createClient(options, false);
+    client.methodCall('run_keyword', ['dir should exist', '.', 'test'], function(err, value){
+      if (err) return done(err);
+      value.should.have.property('status');
+      value.status.should.be.equal('PASS');
+      return done();
+    });
+  });
+
+});
