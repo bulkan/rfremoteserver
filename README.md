@@ -21,20 +21,29 @@ Create a Object like the following and pass it to an instance of RemoteServer.
 ```javascript
 var RemoteServer = require('rfremoteserver');
 
-var TestLibrary = {
-  my_example_keyword = {
-    docs: "an example keyword",
-    args: ["*args"],
-    function(params, callback) {
+var SimpleKeywordLibrary = {
+  file_should_exist: {
+    docs: "test if a file exists",
+    args: ['dir', 'file'],
+    impl: function(params, callback) {
+      var dir = params.shift();
+      var file = params.shift();
       var ret = {};
-      // do testy stuff here then either pass the keyword using this.pass or this.fail
-      return RemoteServer.pass(callback);
+      fs.readdir(dir, function(err, files){
+        ret.return = err || files;
+        if (err) return RemoteServer.fail(ret, callback);
+
+        for (i in files){
+          if (files[i] == file)
+            return RemoteServer.pass(ret, callback);
+        }
+        return RemoteServer.fail(ret, callback);
+      });
     }
   }
 };
 
-
-var server = new RemoteServer({host: "localhost", port: 4242}, [TestLibrary]);
+var server = new RemoteServer({host: "localhost", port: 8270}, [SimpleKeywordLibrary]);
 server.start_remote_server();
 ```
 
@@ -43,7 +52,7 @@ They are also Objects and need to have three properties.
 
 * `docs`: String contain the keyword documentation
 * `args`: Array of the arguments that keyword accepts. use ["\*args"] if your keyword accepts more than one argument.
-* `impl`: The actual keyword function. This function is what gets bound as an xmlrpc method callback hence its args are always `params` & `callback`
+* `impl`: The actual keyword function. This function is what gets bound as an xmlrpc method callback hence its args are always `params` & `callback`.
 
 Example test case file for Robot Framework to use the above remote keyword library
 
@@ -58,6 +67,6 @@ Library    Remote    http://localhost:${PORT}
 *** Test Cases ***
 
 Test Keyword
-    ${ret}=   My Example Keyword
-    Log    ${ret}
+    ${ret}=   File Should Exist  ${CURDIR}  testcases.txt
+    Should Be Equal As Strings  ${ret}  true
 ```

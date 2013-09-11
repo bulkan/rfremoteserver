@@ -25,7 +25,7 @@ describe('Multiple Keyword Libraries', function(){
     server.close(done);
   });
 
-  it('should be able to be loaded', function(done){
+  it('should be able to be load all libraries passed', function(done){
     client.methodCall('get_keyword_names', null, function(err, value){
       if (err) return done(err);
 
@@ -38,7 +38,6 @@ describe('Multiple Keyword Libraries', function(){
       done();
     });
   });
-
 
   it('should be able to run keyword', function(done){
     var client = new xmlrpc.createClient(options, false);
