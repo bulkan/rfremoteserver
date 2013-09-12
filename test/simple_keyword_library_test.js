@@ -1,34 +1,12 @@
-var xmlrpc       = require('xmlrpc')
-  , fs           = require('fs')
-  , RemoteServer = require('../lib/remoteserver');
+var xmlrpc               = require('xmlrpc')
+  , RemoteServer         = require('../lib/remoteserver')
+  , libraries            = require('./keyword_libraries')
+  , SimpleKeywordLibrary = libraries.SimpleKeywordLibrary;
 
 var options = {host: 'localhost', port: 4242};
 
 
-var SimpleKeywordLibrary = {
-  file_should_exist: {
-    docs: "test if a file exists",
-    args: ['dir', 'file'],
-    impl: function(params, callback) {
-      var dir = params.shift();
-      var file = params.shift();
-      var ret = {};
-      fs.readdir(dir, function(err, files){
-        ret.return = err || files;
-        if (err) return RemoteServer.fail(ret, callback);
-
-        for (i in files){
-          if (files[i] == file)
-            return RemoteServer.pass(ret, callback);
-        }
-        return RemoteServer.fail(ret, callback);
-      });
-    }
-  }
-};
-
-
-describe('SimpleKeywordLibrary', function(){
+describe('Simple keyword libraries', function(){
   var server = null;
 
   before(function(done){
@@ -88,7 +66,7 @@ describe('SimpleKeywordLibrary', function(){
     client.methodCall('get_keyword_documentation', ['file should exist'], function(err, value){
       if (err) return done(err);
       value.should.not.be.empty;
-      value.should.equal(SimpleKeywordLibrary.file_should_exist.docs);
+      value.should.equal(libraries.SimpleKeywordLibrary.file_should_exist.docs);
       return done();
     });
   });

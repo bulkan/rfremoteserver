@@ -5,12 +5,16 @@ var options = {host: 'localhost', port: 4242};
 
 describe('RemoteServer', function(){
   var server = null;
+  var client = null;
 
   before(function(done){
     server = new RemoteServer(options);
     server.start_remote_server();
     // need to give the server a litte time to start
-    setTimeout(done, 100);
+    setTimeout(function() { 
+      client = new xmlrpc.createClient(options, false);
+      done();
+    }, 100);
   });
 
   after(function(done){
@@ -25,7 +29,6 @@ describe('RemoteServer', function(){
   });
 
   it('get_keyword_arguments should return correct value', function(done){
-    var client = new xmlrpc.createClient(options, false);
     client.methodCall('get_keyword_arguments', ['get keyword arguments'], function(err, value){
       if (err) return done(err);
       // correct value is that all keywords accept varying arguments
@@ -35,7 +38,6 @@ describe('RemoteServer', function(){
   });
 
   it('get_keyword_name should return the base class list of keyword names', function(done){
-    var client = new xmlrpc.createClient(options, false);
     client.methodCall('get_keyword_names', null, function(err, value){
       if (err) return done(err);
 
