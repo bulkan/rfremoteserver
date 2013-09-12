@@ -3,6 +3,8 @@ var fs           = require('fs')
 
 var TestLibrary = {
   my_example_keyword: {
+    docs: "a sample keyword",
+    args: ["*args"],
     impl: function(params, callback) {
       var ret = {
         output: ['array', 'of', 'outputs'].join('\n'),
@@ -13,6 +15,8 @@ var TestLibrary = {
   },
 
   get_files_in_directory: {
+    docs: "returns the files in a directory",
+    args: ["dir"],
     impl: function(params, callback){
       var self = this;
       var ret = {}
@@ -25,5 +29,5 @@ var TestLibrary = {
   }
 };
 
-var server = new RemoteServer(null, [TestLibrary]);
+var server = new RemoteServer({host: 'localhost', port:8270}, [TestLibrary]);
 server.start_remote_server();

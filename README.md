@@ -22,22 +22,16 @@ Create a Object like the following and pass it to an instance of RemoteServer.
 var RemoteServer = require('rfremoteserver');
 
 var SimpleKeywordLibrary = {
-  file_should_exist: {
-    docs: "test if a file exists",
-    args: ['dir', 'file'],
-    impl: function(params, callback) {
-      var dir = params.shift();
-      var file = params.shift();
-      var ret = {};
-      fs.readdir(dir, function(err, files){
+  get_files_in_directory: {
+    docs: "returns files in a directory",
+    args: ["dir"],
+    impl: function(params, callback){
+      var self = this;
+      var ret = {}
+      fs.readdir('.', function(err, files){
         ret.return = err || files;
-        if (err) return RemoteServer.fail(ret, callback);
-
-        for (i in files){
-          if (files[i] == file)
-            return RemoteServer.pass(ret, callback);
-        }
-        return RemoteServer.fail(ret, callback);
+        if (err) return self.fail(ret, callback);
+        return RemoteServer.pass(ret, callback)
       });
     }
   }
@@ -52,7 +46,15 @@ They are also Objects and need to have three properties.
 
 * `docs`: String contain the keyword documentation
 * `args`: Array of the arguments that keyword accepts. use ["\*args"] if your keyword accepts more than one argument.
-* `impl`: The actual keyword function. This function is what gets bound as an xmlrpc method callback hence its args are always `params` & `callback`.
+* `impl`: The actual keyword function. This function is what gets bound as an xmlrpc method callback hence its args are always `params` & `callback`. This function will need to call the callback function with an object that contains the following properties
+
+        { 
+          return: 'a return falue',
+          status: 'PASS',    // or FAIL
+          output: 'stdout'
+        }
+
+  There is two helper functions on RemoteServer `pass` and `fail` that set the `status` property
 
 Example test case file for Robot Framework to use the above remote keyword library
 
@@ -68,5 +70,5 @@ Library    Remote    http://localhost:${PORT}
 
 Test Keyword
     ${ret}=   File Should Exist  ${CURDIR}  testcases.txt
-    Should Be Equal As Strings  ${ret}  true
+    Should Contain   ${files}  test
 ```
