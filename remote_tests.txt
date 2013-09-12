@@ -1,5 +1,7 @@
 *** Settings ***
 Library    Remote    http://localhost:${PORT}
+Library    Collection
+
 
 *** Variables ***
 ${PORT}    8270
@@ -8,8 +10,8 @@ ${PORT}    8270
 
 Test Keyword
     ${ret}=   My Example Keyword
-    Log   ${ret}
+    Should Contain  ${ret}  value
 
 Test Get Current Working Directory
    ${files}=   Get Files In Directory
-   Log  ${files}
+   Should Contain   ${files}  test
