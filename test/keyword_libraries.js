@@ -25,7 +25,6 @@ exports.SimpleKeywordLibrary = {
   }
 };
 
-
 exports.FileSystemLibrary = {
   dir_should_exist: {
     docs: "test if a directory exists",
@@ -36,4 +35,14 @@ exports.FileSystemLibrary = {
   }
 }
 
+
+exports.AwfulKeywordLibrary = {
+  throw_an_error : {
+    docs: "this keyword will throw/returns an Error",
+    args: ["*args"],
+    impl: function(params, callback){
+      return callback(new Error('I did a boo boo'));
+    }
+  }
+}
 
