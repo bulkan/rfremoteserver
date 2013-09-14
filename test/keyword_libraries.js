@@ -49,6 +49,13 @@ exports.AwfulKeywordLibrary = {
     impl: function(params, callback) {
       throw new Error('lol');
     }
+  },
+
+  dont_call_me_baby: {
+    docs: "this keyword wont call the callback",
+    args: ["*args"],
+    impl: function(params, callback) {
+    }
   }
 }
 

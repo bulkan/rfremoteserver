@@ -1,6 +1,6 @@
 {
   "name": "rfremoteserver",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Robot Framework remote server written in node.js",
   "main": "index.js",
   "repository": {
