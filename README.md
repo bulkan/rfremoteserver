@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/bulkan/robotremoteserver.js.png?branch=master)](https://travis-ci.org/bulkan/robotremoteserver.js)
+[![Build Status](https://travis-ci.org/bulkan/rfremoteserver.png?branch=master)](https://travis-ci.org/bulkan/rfremoteserver)
 
 robotremoteserver.js
 ====================
