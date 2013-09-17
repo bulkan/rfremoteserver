@@ -3,7 +3,7 @@
 robotremoteserver.js
 ====================
 
-[![NPM](https://nodei.co/npm/rfremoteserver.png)](https://nodei.co/npm/rfremoteserver.png/) 
+[![NPM](https://nodei.co/npm/rfremoteserver.png)](https://nodei.co/npm/rfremoteserver/) [![NPM](https://nodei.co/npm-dl/rfremoteserver.png?months=6)](https://nodei.co/npm/rfremoteserver/)
 
 [Robot Framework](http://robotframework.googlecode.com/hg/) Remote Server written in Node.js, loosely based on https://github.com/mkorpela/RoboZombie and https://github.com/comick/node-robotremoteserver
 
