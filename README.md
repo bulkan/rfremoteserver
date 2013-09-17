@@ -41,6 +41,8 @@ var server = new RemoteServer({host: "localhost", port: 8270}, [SimpleKeywordLib
 server.start_remote_server();
 ```
 
+
+
 In the above example, the library is just a JavaScript object with each property being another JavaScript object. These properties are the keywords. 
 They are also Objects and need to have three properties. 
 
@@ -55,6 +57,12 @@ They are also Objects and need to have three properties.
         }
 
   There is two helper functions on RemoteServer `pass` and `fail` that set the `status` property
+
+RemoteServer instance option Object should contain the following properties
+
+* host    : hostname
+* port    : port number to start listening on
+* timeout : the amount of time before the server forcibly timesout the keyword
 
 Example test case file for Robot Framework to use the above remote keyword library
 

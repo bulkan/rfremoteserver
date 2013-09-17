@@ -37,11 +37,24 @@ exports.FileSystemLibrary = {
 
 
 exports.AwfulKeywordLibrary = {
-  throw_an_error : {
+  get_error_value : {
     docs: "this keyword will throw/returns an Error",
     args: ["*args"],
     impl: function(params, callback){
       return callback(new Error('I did a boo boo'));
+    }
+  },
+
+  throw_an_error: {
+    impl: function(params, callback) {
+      throw new Error('lol');
+    }
+  },
+
+  dont_call_me_baby: {
+    docs: "this keyword wont call the callback",
+    args: ["*args"],
+    impl: function(params, callback) {
     }
   }
 }
