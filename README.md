@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/bulkan/rfremoteserver.png?branch=master)](https://travis-ci.org/bulkan/rfremoteserver)
 
-robotremoteserver.js
-====================
+rfremoteserver
+===============
 
 [![NPM](https://nodei.co/npm/rfremoteserver.png)](https://nodei.co/npm/rfremoteserver/) [![NPM](https://nodei.co/npm-dl/rfremoteserver.png?months=6)](https://nodei.co/npm/rfremoteserver/)
 
