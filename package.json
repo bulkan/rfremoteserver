@@ -1,7 +1,7 @@
 {
   "name": "rfremoteserver",
-  "version": "0.0.4",
-  "description": "Robot Framework remote server written in node.js",
+  "version": "0.0.5",
+  "description": "Robot Framework remote server written in Node.js",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -13,6 +13,14 @@
   "scripts": {
     "test": "make test"
   },
+  "keywords": [
+    "testing",
+    "robot framework",
+    "remote server",
+    "keyword driven",
+    "atdd",
+    "bdd"
+  ],
   "author": "Bulkan Evcimen",
   "license": "MIT",
   "dependencies": {
