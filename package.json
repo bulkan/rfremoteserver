@@ -5,10 +5,10 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/bulkan/robotremoteserver.js.git"
+    "url": "git://github.com/bulkan/rfremoteserver"
   },
   "bugs": {
-    "url": "https://github.com/bulkan/robotremoteserver.js/issues"
+    "url": "https://github.com/bulkan/rfremoteserver/issues"
   },
   "scripts": {
     "test": "make test"
