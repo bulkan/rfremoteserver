@@ -16,7 +16,7 @@ Installation
 Usage
 =====
 
-Create a Object like the following and pass it to an instance of RemoteServer. 
+Create an Object like the following and pass it to an instance of `RemoteServer`. 
 
 ```javascript
 var RemoteServer = require('rfremoteserver');
